@@ -117,7 +117,7 @@ class MetalRenderer : public Renderer {
         [[MTLRenderPipelineDescriptorClass alloc] init];
     mtl_render_pipeline_descriptor.vertexFunction = vertex_function;
     mtl_render_pipeline_descriptor.fragmentFunction = fragment_function;
-    mtl_render_pipeline_descriptor.colorAttachments[0].pixelFormat = MTLPixelFormatBGRA8Unorm;
+    mtl_render_pipeline_descriptor.colorAttachments[0].pixelFormat = MTLPixelFormatBGRA8Unorm_sRGB;
     mtl_render_pipeline_descriptor.depthAttachmentPixelFormat = MTLPixelFormatDepth32Float_Stencil8;
     mtl_render_pipeline_descriptor.stencilAttachmentPixelFormat =
         MTLPixelFormatDepth32Float_Stencil8;
@@ -360,7 +360,7 @@ CardboardDistortionRenderer* MakeCardboardMetalDistortionRenderer(IUnityInterfac
   IUnityGraphicsMetalV1* metal_interface = xr_interfaces->Get<IUnityGraphicsMetalV1>();
   const CardboardMetalDistortionRendererConfig config{
       reinterpret_cast<uint64_t>(CFBridgingRetain(metal_interface->MetalDevice())),
-      MTLPixelFormatRGBA8Unorm, MTLPixelFormatDepth32Float_Stencil8,
+      MTLPixelFormatBGRA8Unorm_sRGB, MTLPixelFormatDepth32Float_Stencil8,
       MTLPixelFormatDepth32Float_Stencil8};
 
   CardboardDistortionRenderer* distortion_renderer =
